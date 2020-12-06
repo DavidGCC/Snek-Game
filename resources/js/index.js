@@ -8,12 +8,11 @@ document.getElementById("gameStarter").onclick = () => {
     c = document.getElementById("cnvs");
     context = c.getContext("2d");
     document.addEventListener("keydown", handleKeyPress);
+    resetGame()
     clearInterval(gameInterval);
     gameInterval = setInterval(mainGame, 1000 / gameSpeed);
 
 }
-
-
 // FUNCTION DECLARATIONS START HERE
 const getRandom = mx => {
     let temp = Math.floor(Math.random() * mx);
@@ -37,6 +36,7 @@ const detectAppleCollision = (pX, pY, aX, aY) => {
     return false;
 }
 
+
 // FUNCTION DECLARATIONS END HERE
 
 // VARIABLE DECLARATIONS START HERE
@@ -51,6 +51,14 @@ let score = 0;
 let highScore = 0;
 // VRIABLE DECLARATIONS END HERE
 
+const resetGame = () => {
+    playerX = playerY = 300
+    moveX = moveY = 0
+    tail = [];
+    tailLength = 1; // starting length
+    lastKey;
+    score = 0
+}
 
 const mainGame = () => {
     context.fillStyle = "black";
@@ -87,16 +95,11 @@ const mainGame = () => {
         fillSnake(tail[i].pX, tail[i].pY); // fill every block in snake's length
         // below is self collision detection code
         if (tail[i].pX == playerX && tail[i].pY == playerY) {
-            tailLength = 1;
-            tail = [];
-            playerX = 300;
-            playerY = 300;
-            moveX = moveY = 0;
             if (score > highScore) {
                 highScore = score;
                 document.getElementById("highScore").textContent = highScore;
             }
-            score = 0;
+            resetGame()
             document.getElementById("score").textContent = score;
         }
     }

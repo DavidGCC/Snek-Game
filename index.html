@@ -1,34 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Simple Snek Game</title>
-    <link rel="stylesheet" href="resources/css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
-</head>
-<body>
-
-    
+    <link rel="stylesheet" href="resources/css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
     <div id="game-container">
-        <canvas id="cnvs" width="600" height="600"></canvas>
-        <div id="score-container">
-            <p id="scoreText">Score: <span id="score">0</span></p>
-            <p id="highScoreText">High Score: <span id="highScore">0</span></p>
-            <br>
-            <br>
-            <br>
-            <form>
-                <p>Select Game Difficulty</p>
-                <input id="speedEasy" type="radio" name="gameSpeed" value="15"><label for="gameSpeed">Easy</label><br>
-                <input id="speedMedium" type="radio" name="gameSpeed" value="30"><label for="gameSpeed">Medium</label><br>
-                <input id="speedHard" type="radio" name="gameSpeed" value="45"><label for="gameSpeed">Hard</label><br>
-            </form>
-            <button id="gameStarter">Start Game</button>
-        </div>
+      <canvas id="cnvs" width="600" height="600"></canvas>
+      <div id="score-container">
+        <p id="scoreText">Score: <span id="score">0</span></p>
+        <p id="highScoreText">High Score: <span id="highScore">0</span></p>
+        <br />
+        <br />
+        <br />
+        <form class="form-control">
+          <p>Select Game Difficulty</p>
+          <div class="form-check form-check-inline">
+            <input
+            id="speedEasy"
+            type="radio"
+            name="gameSpeed"
+            value="15"
+          />
+            <label class="form-check-label" for="inlineRadio1">Easy</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input
+            id="speedMedium"
+            type="radio"
+            name="gameSpeed"
+            value="30"
+          />
+            <label class="form-check-label" for="inlineRadio1">Medium</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input
+            id="speedHard"
+            type="radio"
+            name="gameSpeed"
+            value="45"
+          />
+            <label class="form-check-label" for="inlineRadio1">Hard</label>
+          </div>
+        </form>
+        <button id="gameStarter" class="btn btn-primary">Start Game</button>
+      </div>
     </div>
-    
 
     <script src="resources/js/index.js"></script>
-</body>
+  </body>
 </html>
