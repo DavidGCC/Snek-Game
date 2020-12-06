@@ -1,0 +1,9 @@
+* { padding: 0; margin: 0; box-sizing: border-box; font-family: "Roboto", sans-serif; }
+
+#game-container { display: flex; justify-content: space-around; }
+
+#score-container p { font-size: 3rem; }
+
+#score-container label { font-size: 2rem; }
+
+#score-container input { width: 1.5rem; height: 1.5rem; margin: 0 auto; }
