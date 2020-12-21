@@ -52,12 +52,17 @@ let highScore = 0;
 // VRIABLE DECLARATIONS END HERE
 
 const resetGame = () => {
+    if (score > highScore) {
+        highScore = score;
+        document.getElementById("highScore").textContent = highScore;
+    }
     playerX = playerY = 300
     moveX = moveY = 0
     tail = [];
     tailLength = 1; // starting length
     lastKey;
     score = 0
+    document.getElementById("score").textContent = score;
 }
 
 const mainGame = () => {
@@ -67,17 +72,8 @@ const mainGame = () => {
     // which makes them look like animation
     playerX += moveX * squareWidth; // move
     playerY += moveY * squareWidth; // move depending on moveY and moveX value
-    if (playerX >= c.width) {
-        playerX = 0;
-    }
-    if (playerX < 0) {
-        playerX = c.width;
-    }
-    if (playerY >= c.height) {
-        playerY = 0;
-    }
-    if (playerY < 0) {
-        playerY = c.height;
+    if (playerX >= c.width || playerX < 0 || playerY >= c.height || playerY < 0) {
+        resetGame()
     }
     // code above checks if player moves out of screen
     // and moves it back from the opposite side
@@ -95,12 +91,7 @@ const mainGame = () => {
         fillSnake(tail[i].pX, tail[i].pY); // fill every block in snake's length
         // below is self collision detection code
         if (tail[i].pX == playerX && tail[i].pY == playerY) {
-            if (score > highScore) {
-                highScore = score;
-                document.getElementById("highScore").textContent = highScore;
-            }
             resetGame()
-            document.getElementById("score").textContent = score;
         }
     }
     // pushes block in every iteration
