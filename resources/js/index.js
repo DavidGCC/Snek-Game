@@ -1,4 +1,5 @@
 let context, c = "", squareWidth = 15, gameSpeed = 15, gameInterval; //Variables for canvas, context and square size
+let boundriesElement = document.getElementById('boundries')
 document.getElementById("gameStarter").onclick = () => {
     for (let i = 0; i < 3; i++) {
         if (document.getElementsByTagName("input")[i].checked == true) {
@@ -52,14 +53,19 @@ let highScore = 0;
 // VRIABLE DECLARATIONS END HERE
 
 const resetGame = () => {
+    if (score > highScore) {
+        highScore = score;
+        document.getElementById("highScore").textContent = highScore;
+    }
     playerX = playerY = 300
     moveX = moveY = 0
     tail = [];
     tailLength = 1; // starting length
-    lastKey;
+    lastKey = ''
     score = 0
+    document.getElementById("score").textContent = score;
 }
-
+boundriesElement.addEventListener('change', () => resetGame()) 
 const mainGame = () => {
     context.fillStyle = "black";
     context.fillRect(0, 0, c.width, c.height);
@@ -67,17 +73,24 @@ const mainGame = () => {
     // which makes them look like animation
     playerX += moveX * squareWidth; // move
     playerY += moveY * squareWidth; // move depending on moveY and moveX value
-    if (playerX >= c.width) {
-        playerX = 0;
-    }
-    if (playerX < 0) {
-        playerX = c.width;
-    }
-    if (playerY >= c.height) {
-        playerY = 0;
-    }
-    if (playerY < 0) {
-        playerY = c.height;
+    if (boundriesElement.checked) {
+        if (playerX >= c.width + squareWidth || playerX < (0 - squareWidth) || playerY >= (c.height + squareWidth) || playerY < (0 -squareWidth)) {
+            resetGame()
+            alert('Game Over')
+        }
+    } else {
+        if (playerX >= c.width) {
+            playerX = 0;
+        }
+        if (playerX < 0) {
+            playerX = c.width;
+        }
+        if (playerY >= c.height) {
+            playerY = 0;
+        }
+        if (playerY < 0) {
+            playerY = c.height;
+        }
     }
     // code above checks if player moves out of screen
     // and moves it back from the opposite side
@@ -94,13 +107,9 @@ const mainGame = () => {
     for (let i = 0; i < tail.length; i++) {
         fillSnake(tail[i].pX, tail[i].pY); // fill every block in snake's length
         // below is self collision detection code
-        if (tail[i].pX == playerX && tail[i].pY == playerY) {
-            if (score > highScore) {
-                highScore = score;
-                document.getElementById("highScore").textContent = highScore;
-            }
+        if (tail[i].pX == playerX && tail[i].pY == playerY && tailLength !== 1) {
             resetGame()
-            document.getElementById("score").textContent = score;
+            alert('Game Over')
         }
     }
     // pushes block in every iteration
